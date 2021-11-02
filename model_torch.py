@@ -42,7 +42,7 @@ class T_CNN(nn.Module):
         # self.conv_9 = nn.Conv2d(16, 16, 3, padding=1)
         # Concatenate
         self.conv_10 = nn.Conv2d(147, 3, 3, padding=1)
-
+        
     def forward(self, x):
         x1 = F.relu(self.conv_1(x))  # 1
         x2 = F.relu(self.conv_2(x1))  # 2
@@ -66,6 +66,7 @@ class Paired_Dataset(Dataset):
         self.train_folder = train_folder
         self.target_folder = target_folder
         self.image_list = os.listdir(self.train_folder)
+        print(f'Number of Images: {len(self.image_list)}')
         self.transform = transform
 
     def __len__(self) -> int:
