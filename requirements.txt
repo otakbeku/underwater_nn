@@ -1,0 +1,7 @@
+pip==21.2.4
+setuptools==58.2.0
+wheel==0.37.0
+torch==1.9.0
+torchvision==0.10
+kornia
+opencv-python

@@ -17,6 +17,7 @@ from torchvision import transforms, utils
 from skimage import io, transform
 
 from PIL import Image
+import matplotlib.pyplot as plt
 
 
 # ignore warning
@@ -81,3 +82,23 @@ class Paired_Dataset(Dataset):
             train_image = self.transform(train_image)
             target_image = self.transform(target_image)
         return train_image, target_image
+
+
+class Infer_Dataset(Dataset):
+
+    def __init__(self, test_folder, transform=None):
+        self.test_folder = test_folder
+        self.image_list = os.listdir(self.test_folder)
+        print(f'Number of Images: {len(self.image_list)}')
+        self.transform = transform
+
+    def __len__(self) -> int:
+        return len(self.image_list)
+
+    def __getitem__(self, index: int):
+        test_image = Image.open(os.path.join(
+            self.test_folder, self.image_list[index]))
+        if self.transform:
+            test_image = self.transform(test_image)
+
+        return test_image, self.image_list[index]
